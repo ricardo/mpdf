@@ -54,7 +54,7 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 	{
 		$this->writer->object();
 		$this->mpdf->MetadataRoot = $this->mpdf->n;
-		$Producer = 'mPDF ' . Mpdf::VERSION;
+		$Producer = 'Criar.io';
 		$z = date('O'); // +0200
 		$offset = substr($z, 0, 3) . ':' . substr($z, 3, 2);
 		$CreationDate = date('Y-m-d\TH:i:s') . $offset; // 2006-03-10T10:47:26-05:00 2006-06-19T09:05:17Z
@@ -151,7 +151,7 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 
 	public function writeInfo() // _putinfo
 	{
-		$this->writer->write('/Producer ' . $this->writer->utf16BigEndianTextString('mPDF ' . $this->getVersionString()));
+		$this->writer->write('/Producer ' . $this->writer->utf16BigEndianTextString('Criar.io'));
 
 		if (!empty($this->mpdf->title)) {
 			$this->writer->write('/Title ' . $this->writer->utf16BigEndianTextString($this->mpdf->title));
@@ -183,6 +183,7 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 		$this->writer->write('/ModDate ' . $this->writer->string(date('YmdHis') . $offset));
 		if ($this->mpdf->PDFX) {
 			$this->writer->write('/Trapped/False');
+			$this->writer->write('/GTS_PDFXConformance(PDF/X-1a:2003)');
 			$this->writer->write('/GTS_PDFXVersion(PDF/X-1a:2003)');
 		}
 	}
