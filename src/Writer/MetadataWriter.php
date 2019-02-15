@@ -119,7 +119,7 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 
 		// This bit is specific to PDFX-1a
 		if ($this->mpdf->PDFX) {
-			$m .= '   <rdf:Description rdf:about="uuid:' . $uuid . '" xmlns:pdfx="http://ns.adobe.com/pdfx/1.3/" pdfx:Apag_PDFX_Checkup="1.3" pdfx:GTS_PDFXConformance="PDF/X-1a:2003" pdfx:GTS_PDFXVersion="PDF/X-1:2003"/>' . "\n";
+			$m .= '   <rdf:Description rdf:about="uuid:' . $uuid . '" xmlns:pdfx="http://ns.adobe.com/pdfx/1.3/" pdfx:Apag_PDFX_Checkup="1.3" pdfx:GTS_PDFXConformance="PDF/X-1a:2001" pdfx:GTS_PDFXVersion="PDF/X-1:2001"/>' . "\n";
 		} // This bit is specific to PDFA-1b
 		elseif ($this->mpdf->PDFA) {
 
@@ -183,8 +183,8 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 		$this->writer->write('/ModDate ' . $this->writer->string(date('YmdHis') . $offset));
 		if ($this->mpdf->PDFX) {
 			$this->writer->write('/Trapped/False');
-			$this->writer->write('/GTS_PDFXConformance(PDF/X-1a:2003)');
-			$this->writer->write('/GTS_PDFXVersion(PDF/X-1a:2003)');
+			$this->writer->write('/GTS_PDFXConformance(PDF/X-1a:2001)');
+			$this->writer->write('/GTS_PDFXVersion(PDF/X-1a:2001)');
 		}
 	}
 
@@ -551,7 +551,8 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 								$htarg = $this->mpdf->pageDim[$l[0]]['h'] * Mpdf::SCALE;
 							} else {
 								$htarg = $this->mpdf->h * Mpdf::SCALE;
-							} // doesn't really matter
+							}
+							// doesn't really matter
 
 							$annot .= sprintf(' /Dest [%d 0 R /XYZ 0 %.3F null]>>', 1 + 2 * $l[0], $htarg - $l[1] * Mpdf::SCALE);
 						}
