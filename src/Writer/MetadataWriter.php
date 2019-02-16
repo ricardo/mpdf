@@ -120,7 +120,12 @@ class MetadataWriter implements \Psr\Log\LoggerAwareInterface
 		// This bit is specific to PDFX-1a
 		if ($this->mpdf->PDFX) {
 			$m .= '   <rdf:Description rdf:about="uuid:' . $uuid . '" xmlns:pdfx="http://ns.adobe.com/pdfx/1.3/" pdfx:Apag_PDFX_Checkup="1.3" pdfx:GTS_PDFXConformance="PDF/X-1a:2001" pdfx:GTS_PDFXVersion="PDF/X-1:2001"/>' . "\n";
-		} // This bit is specific to PDFA-1b
+			$m .= '   <rdf:Description rdf:about="" xmlns:pdfxid="http://www.npes.org/pdfx/ns/id/" pdfxid:GTS_PDFXVersion="PDF/X-1:2001" />' . "\n";
+
+			// - TODO: Add color profile
+			$m .= '<rdf:Description rdf:about="" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" photoshop:ColorMode="4" photoshop:ICCProfile="U.S. Web Coated (SWOP) v2" />'  . "\n";
+		}
+		// This bit is specific to PDFA-1b
 		elseif ($this->mpdf->PDFA) {
 
 			if (strpos($this->mpdf->PDFAversion, '-') === false) {
